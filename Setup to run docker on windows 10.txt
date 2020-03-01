@@ -1,0 +1,335 @@
+Step1:
+-------------------------------------
+Install Windows Docker Engine:
+-------------------------------------
+Download Commnunity Edition for Windows:
+Download Docker Desktop for Widnows via docker hub:
+https://hub.docker.com/editions/community/docker-ce-desktop-windows/
+click on Docker Desktop Installer.exe and run normal installation
+done!
+
+or
+-----------------------------------
+Install CentOS docker Enginer - Community edition:
+-----------------------------------
+https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-repository
+step A:
+Install using the repository:
+$ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 
+$ sudo yum install docker-ce docker-ce-cli containerd.io
+
+To install a specific version of Docker Engine - Community, list the available versions in the repo, then select and install:
+
+a. List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
+
+$ yum list docker-ce --showduplicates | sort -r
+
+docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable
+docker-ce.x86_64  3:18.09.0-3.el7                     docker-ce-stable
+docker-ce.x86_64  18.06.1.ce-3.el7                    docker-ce-stable
+docker-ce.x86_64  18.06.0.ce-3.el7                    docker-ce-stable
+The list returned depends on which repositories are enabled, and is specific to your version of CentOS (indicated by the .el7 suffix in this example).
+
+step B:
+b. Install a specific version by its fully qualified package name, 
+which is the package name (docker-ce) plus the version string (2nd column) starting at the first colon (:), 
+up to the first hyphen, separated by a hyphen (-). 
+For example, docker-ce-18.09.1.
+
+$ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+Docker is installed but not started. The docker group is created, but no users are added to the group.
+
+Step C:
+Start Docker.
+$ sudo systemctl start docker
+Verify that Docker Engine - Community is installed correctly by running the hello-world image.
+$ sudo docker run hello-world
+This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits.
+
+-------------------------
+Install from a package:
+-------------------------
+sudo yum install /path/to/package.rpm
+sudo systemctl start docker
+sudo docker run hello-world
+
+Note:
+If you would like to use Docker as a non-root user, you should now consider adding your user to the “docker” group with something like:
+  sudo usermod -aG docker your-user
+  
+-----------------------------------------
+Uninstall Docker Engine - Community
+-----------------------------------------
+Uninstall the Docker package:
+
+$ sudo yum remove docker-ce
+Images, containers, volumes, or customized configuration files on your host are not automatically removed. To delete all images, containers, and volumes:
+
+$ sudo rm -rf /var/lib/docker
+You must delete any edited configuration files manually.  
+
+
+--------------------------------------
+Post-installation steps for linux:
+---------------------------------------
+https://docs.docker.com/install/linux/linux-postinstall/
+
+
+--------------------------------------
+Docker Compose:
+--------------------------------------
+https://docs.docker.com/compose/
+
+--------------------------------
+Official image on docker hub:
+--------------------------------
+https://hub.docker.com/search?q=&type=image&image_filter=official
+
+
+e.g Jenkins
+Bilding docker jenkins master:
+https://hub.docker.com/_/jenkins  (history: https://github.com/docker-library/official-images/pulls?q=label%3Alibrary%2Fjenkins)
+docker file: https://github.com/jenkinsci/docker/blob/587b2856cd225bb152c4abeeaaa24934c75aa460/Dockerfile
+
+Building coker jenkins slave:
+Jenkins JNLP Agent Docker image:
+https://hub.docker.com/r/jenkinsci/jnlp-slave
+docker file: https://github.com/jenkinsci/docker-jnlp-slave/blob/master/Dockerfile
+
+----------------------------------------------------
+Step D Test initial run after installed the docker engine:
+----------------------------------------------------
+
+PS C:\> docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete                                                                                             
+Digest: sha256:fc6a51919cfeb2e6763f62b6d9e8815acbf7cd2e476ea353743570610737b752
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+ 
+ 
+----------------------------------------------------------------------------------------------------------------------------------------
+Start installing docker for the first time:
+----------------------------------------------------------------------------------------------------------------------------------------
+
+step2:
+docker jenkins:
+docker version
+docker info
+PS C:\> docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+
+-------------------------------
+download Jenkins docker image:
+-------------------------------
+PS F:\docker> docker pull jenkins/jenkins:lts
+lts: Pulling from jenkins/jenkins
+3192219afd04: Pull complete                                                                                             
+17c160265e75: Pull complete                                                                                             
+cc4fe40d0e61: Pull complete                                                                                             
+9d647f502a07: Pull complete                                                                                             
+d108b8c498aa: Pull complete                                                                                             
+1bfe918b8aa5: Pull complete                                                                                             
+dafa1a7c0751: Pull complete                                                                                             
+accd40f92d51: Pull complete                                                                                             
+7d5035110320: Pull complete                                                                                             
+0fd04d49edae: Pull complete                                                                                             
+74ab2f8fecf1: Pull complete                                                                                             
+c068f3bd48cb: Pull complete                                                                                             
+3dd608538cfe: Pull complete                                                                                             
+1b68edba1d31: Pull complete                                                                                             
+f9a2de088119: Pull complete                                                                                             
+b7107b41352b: Pull complete                                                                                             
+7a3ec3277ba2: Pull complete                                                                                             
+f571a79871bc: Pull complete                                                                                             
+93439ea5679a: Pull complete                                                                                             
+Digest: sha256:75f6790823a8ecc24885ddde337d940bc85ba5164633be29901e167152c565af
+Status: Downloaded newer image for jenkins/jenkins:lts
+docker.io/jenkins/jenkins:lts
+
+step3:
+-------------------------------------------
+Install Jenkins docker downloaded image
+-------------------------------------------
+PS F:\docker> docker run -p 9090:9090 -p 60000:60000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+Running from: /usr/share/jenkins/jenkins.war
+webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2020-03-01 02:34:47.424+0000 [id=1]     INFO    org.eclipse.jetty.util.log.Log#initialized: Logging initialized @972ms to org.eclipse.jetty.util.log.JavaUtilLog
+2020-03-01 02:34:47.721+0000 [id=1]     INFO    winstone.Logger#logInternal: Beginning extraction from war file
+2020-03-01 02:34:50.169+0000 [id=1]     WARNING o.e.j.s.handler.ContextHandler#setContextPath: Empty contextPath
+2020-03-01 02:34:50.492+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: jetty-9.4.25.v20191220; built: 2019-12-20T17:00:00.294Z; git: a9729c7e7f33a459d2616a8f9e9ba8a90f432e95; jvm 1.8.0_242-b08
+2020-03-01 02:34:51.142+0000 [id=1]     INFO    o.e.j.w.StandardDescriptorProcessor#visitServlet: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2020-03-01 02:34:51.303+0000 [id=1]     INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: DefaultSessionIdManager workerName=node0
+2020-03-01 02:34:51.304+0000 [id=1]     INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: No SessionScavenger set, using defaults
+2020-03-01 02:34:51.318+0000 [id=1]     INFO    o.e.j.server.session.HouseKeeper#startScavenging: node0 Scavenging every 600000ms
+2020-03-01 02:34:52.218+0000 [id=1]     INFO    hudson.WebAppMain#contextInitialized: Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2020-03-01 02:34:52.648+0000 [id=1]     INFO    o.e.j.s.handler.ContextHandler#doStart: Started w.@4a9e6faf{Jenkins v2.204.3,/,file:///var/jenkins_home/war/,AVAILABLE}{/var/jenkins_home/war}
+2020-03-01 02:34:52.791+0000 [id=1]     INFO    o.e.j.server.AbstractConnector#doStart: Started ServerConnector@4a8355dd{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2020-03-01 02:34:52.791+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: Started @6341ms
+2020-03-01 02:34:52.796+0000 [id=20]    INFO    winstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled
+2020-03-01 02:34:56.609+0000 [id=27]    INFO    jenkins.InitReactorRunner$1#onAttained: Started initialization
+2020-03-01 02:34:56.729+0000 [id=26]    INFO    jenkins.InitReactorRunner$1#onAttained: Listed all plugins
+2020-03-01 02:35:00.056+0000 [id=27]    INFO    jenkins.InitReactorRunner$1#onAttained: Prepared all plugins
+2020-03-01 02:35:00.077+0000 [id=28]    INFO    jenkins.InitReactorRunner$1#onAttained: Started all plugins
+2020-03-01 02:35:00.102+0000 [id=26]    INFO    jenkins.InitReactorRunner$1#onAttained: Augmented all extensions
+2020-03-01 02:35:01.528+0000 [id=26]    INFO    jenkins.InitReactorRunner$1#onAttained: Loaded all jobs
+2020-03-01 02:35:01.637+0000 [id=41]    INFO    hudson.model.AsyncPeriodicWork#lambda$doRun$0: Started Download metadata
+2020-03-01 02:35:01.695+0000 [id=41]    INFO    hudson.util.Retrier#start: Attempt #1 to do the action check updates server
+2020-03-01 02:35:03.662+0000 [id=26]    INFO    o.s.c.s.AbstractApplicationContext#prepareRefresh: Refreshing org.springframework.web.context.support.StaticWebApplicationContext@7cf364c7: display name [Root WebApplicationContext]; startup date [Sun Mar 01 02:35:03 UTC 2020]; root of context hierarchy
+2020-03-01 02:35:03.665+0000 [id=26]    INFO    o.s.c.s.AbstractApplicationContext#obtainFreshBeanFactory: Bean factory for application context [org.springframework.web.context.support.StaticWebApplicationContext@7cf364c7]: org.springframework.beans.factory.support.DefaultListableBeanFactory@66738345
+2020-03-01 02:35:03.694+0000 [id=26]    INFO    o.s.b.f.s.DefaultListableBeanFactory#preInstantiateSingletons: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@66738345: defining beans [authenticationManager]; root of factory hierarchy
+2020-03-01 02:35:04.226+0000 [id=26]    INFO    o.s.c.s.AbstractApplicationContext#prepareRefresh: Refreshing org.springframework.web.context.support.StaticWebApplicationContext@447281b2: display name [Root WebApplicationContext]; startup date [Sun Mar 01 02:35:04 UTC 2020]; root of context hierarchy
+2020-03-01 02:35:04.227+0000 [id=26]    INFO    o.s.c.s.AbstractApplicationContext#obtainFreshBeanFactory: Bean factory for application context [org.springframework.web.context.support.StaticWebApplicationContext@447281b2]: org.springframework.beans.factory.support.DefaultListableBeanFactory@9402762
+2020-03-01 02:35:04.229+0000 [id=26]    INFO    o.s.b.f.s.DefaultListableBeanFactory#preInstantiateSingletons: Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@9402762: defining beans [filter,legacy]; root of factory hierarchy
+2020-03-01 02:35:04.971+0000 [id=26]    INFO    jenkins.install.SetupWizard#init:
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+5b5bde6161a840819b84930b55e1f21f
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+2020-03-01 02:35:19.426+0000 [id=41]    INFO    hudson.model.UpdateSite#updateData: Obtained the latest update center data file for UpdateSource default
+2020-03-01 02:35:20.812+0000 [id=26]    INFO    hudson.model.UpdateSite#updateData: Obtained the latest update center data file for UpdateSource default
+2020-03-01 02:35:22.285+0000 [id=27]    INFO    jenkins.InitReactorRunner$1#onAttained: Completed initialization
+2020-03-01 02:35:22.360+0000 [id=19]    INFO    hudson.WebAppMain$3#run: Jenkins is fully up and running
+
+
+----------------------------
+show jenkins docker running:
+----------------------------
+PS F:\docker> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                                                   NAMES
+d63437e4fdae        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   7 minutes ago       Up 7 minutes        8080/tcp, 0.0.0.0:9090->9090/tcp, 50000/tcp, 0.0.0.0:60000->60000/tcp   crazy_williams
+
+----------------------------------------------------------
+attemp to remove all dockers containers (didn't work): (it didn't work because the containers are still running)
+----------------------------------------------------------
+https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/
+
+PS F:\docker> docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+5c145d75266a1d2261501e1e763d53336dc3b2d9347cb13b55ad2d42e634efc2
+
+Total reclaimed space: 0B
+PS F:\docker> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                                                   NAMES
+d63437e4fdae        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   9 minutes ago       Up 9 minutes        8080/tcp, 0.0.0.0:9090->9090/tcp, 50000/tcp, 0.0.0.0:60000->60000/tcp   crazy_williams
+PS F:\docker> docker system prune -f
+Total reclaimed space: 0B
+PS F:\docker> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                                                   NAMES
+d63437e4fdae        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   9 minutes ago       Up 9 minutes        8080/tcp, 0.0.0.0:9090->9090/tcp, 50000/tcp, 0.0.0.0:60000->60000/tcp   crazy_williams
+PS F:\docker> docker system prune --volumes
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all volumes not used by at least one container
+  - all dangling images
+  - all dangling build cache
+
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B
+PS F:\docker> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                                                   NAMES
+d63437e4fdae        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   10 minutes ago      Up 10 minutes       8080/tcp, 0.0.0.0:9090->9090/tcp, 50000/tcp, 0.0.0.0:60000->60000/tcp   crazy_williams
+PS F:\docker> docker container ls -a
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                                                   NAMES
+d63437e4fdae        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   10 minutes ago      Up 10 minutes       8080/tcp, 0.0.0.0:9090->9090/tcp, 50000/tcp, 0.0.0.0:60000->60000/tcp   crazy_williams
+a running container d63437e4fdae92e23fd9fccfe86140f174f44399d298667f1b826627352a00f3. Stop the container before attempting removal or force remove
+
+----------------------------------------------------------
+attemp to remove all dockers containers (worked!):
+---------------------------------------------------------
+PS F:\docker> docker container rm -f d63437e4fdae
+d63437e4fdae
+PS F:\docker> docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+----------------------------------------------------------
+install docker from previoulsly installed jenkins image:
+----------------------------------------------------------
+PS C:\> docker run -p 7070:8080 -p 60000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+Running from: /usr/share/jenkins/jenkins.war
+webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2020-03-01 02:48:52.573+0000 [id=1]     INFO    org.eclipse.jetty.util.log.Log#initialized: Logging initialized @699ms to org.eclipse.jetty.util.log.JavaUtilLog
+2020-03-01 02:48:52.836+0000 [id=1]     INFO    winstone.Logger#logInternal: Beginning extraction from war file
+2020-03-01 02:48:52.893+0000 [id=1]     WARNING o.e.j.s.handler.ContextHandler#setContextPath: Empty contextPath
+2020-03-01 02:48:52.994+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: jetty-9.4.25.v20191220; built: 2019-12-20T17:00:00.294Z; git: a9729c7e7f33a459d2616a8f9e9ba8a90f432e95; jvm 1.8.0_242-b08
+2020-03-01 02:48:53.581+0000 [id=1]     INFO    o.e.j.w.StandardDescriptorProcessor#visitServlet: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2020-03-01 02:48:53.701+0000 [id=1]     INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: DefaultSessionIdManager workerName=node0
+2020-03-01 02:48:53.702+0000 [id=1]     INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: No SessionScavenger set, using defaults
+2020-03-01 02:48:53.707+0000 [id=1]     INFO    o.e.j.server.session.HouseKeeper#startScavenging: node0 Scavenging every 660000ms
+2020-03-01 02:48:54.393+0000 [id=1]     INFO    hudson.WebAppMain#contextInitialized: Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2020-03-01 02:48:54.578+0000 [id=1]     INFO    o.e.j.s.handler.ContextHandler#doStart: Started w.@147e2ae7{Jenkins v2.204.3,/,file:///var/jenkins_home/war/,AVAILABLE}{/var/jenkins_home/war}
+2020-03-01 02:48:54.644+0000 [id=1]     INFO    o.e.j.server.AbstractConnector#doStart: Started ServerConnector@2c6a3f77{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2020-03-01 02:48:54.645+0000 [id=1]     INFO    org.eclipse.jetty.server.Server#doStart: Started @2772ms
+2020-03-01 02:48:54.658+0000 [id=20]    INFO    winstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled
+2020-03-01 02:48:57.487+0000 [id=27]    INFO    jenkins.InitReactorRunner$1#onAttained: Started initialization
+2020-03-01 02:48:57.640+0000 [id=25]    INFO    jenkins.InitReactorRunner$1#onAttained: Listed all plugins
+2020-03-01 02:49:00.516+0000 [id=26]    INFO    jenkins.InitReactorRunner$1#onAttained: Prepared all plugins
+2020-03-01 02:49:00.554+0000 [id=25]    INFO    jenkins.InitReactorRunner$1#onAttained: Started all plugins
+2020-03-01 02:49:00.622+0000 [id=27]    INFO    jenkins.InitReactorRunner$1#onAttained: Augmented all extensions
+2020-03-01 02:49:01.412+0000 [id=25]    INFO    jenkins.InitReactorRunner$1#onAttained: Loaded all jobs
+2020-03-01 02:49:01.651+0000 [id=41]    INFO    hudson.model.AsyncPeriodicWork#lambda$doRun$0: Started Download metadata
+2020-03-01 02:49:01.694+0000 [id=41]    INFO    hudson.model.AsyncPeriodicWork#lambda$doRun$0: Finished Download metadata. 30 ms
+
+PS C:\> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                              NAMES
+273f9bc96f98        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   26 minutes ago      Up 26 minutes       0.0.0.0:7070->8080/tcp, 0.0.0.0:60000->50000/tcp   reverent_khorana
+PS C:\>
+
+-------------------------------------------------------------------------------------------------------------------------
+Login using the web-browser to start your jenkins installation just like on a normal computer:
+-------------------------------------------------------------------------------------------------------------------------
+http://127.0.0.1:7070/
+past in the init password -> 5b5bde6161a840819b84930b55e1f21f  (presented on the initial docker run installation; somehow it didn't show up again on the second install)
+
+Stop docker:
+PS C:\> docker ps
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                                              NAMES
+273f9bc96f98        jenkins/jenkins:lts   "/sbin/tini -- /usr/…"   36 minutes ago      Up 36 minutes       0.0.0.0:7070->8080/tcp, 0.0.0.0:60000->50000/tcp   reverent_khorana
+PS C:\> docker stop 273f9bc96f98
+273f9bc96f98
+PS C:\> docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+
